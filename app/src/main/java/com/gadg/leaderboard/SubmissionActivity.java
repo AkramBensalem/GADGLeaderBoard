@@ -81,6 +81,11 @@ public class SubmissionActivity extends AppCompatActivity {
         mEmail = mEmailEditText.getText().toString();
         mLink = mProjectLinkEditText.getText().toString();
 
+        // make sure that all field is written
+        if (mName.isEmpty() || mLastName.isEmpty() || mEmail.isEmpty() || mLink.isEmpty()){
+            Toast.makeText(getBaseContext(), "You have to complete all the field!", Toast.LENGTH_LONG).show();
+            return;
+        }
         LearnerListService taskService = ServiceBuilder.buildeService(LearnerListService.class);
         Call<Void> call = taskService.sendProject(BASE_URL, mName, mLastName, mEmail, mLink);
         // send the data
